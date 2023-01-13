@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style-calculator.css">
+  <title>calculator</title>
+</head>
+<style>
+  body{
+    background-color: #efefef;
+  }
+  div.container{
+    max-width: 400px;
+    box-shadow: 0px 0px 43px 17px rgb(221,221,221);
+    margin: 0vh auto 0 auto;
+  }
+  div#display{
+    text-align: right;
+    height: 70px;
+    line-height: 70px;
+    padding: 16px 8px;
+    font-size: 25px;
+    border: 1px solid #999;
+  }
+  .content{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid #999;
+    border-left: 1px solid #999;
+  }
+  .content > div {
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+  }
+  .buttondis{
+    border: 0.5px solid #999;
+    line-height: 100px;
+    text-align: center;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  #mosavy{
+    background-color: orange;
+    color: black;
+  }
+  #clear {
+    background-color: orange;
+    color: black;
+  }
+  .buttondis:hover {
+    background-color: black;
+    color: white;
+    transition: 0.5s ease-in-out;
+  }
+
+</style>
+<body>
+
+<section>
+    <div class="container">
+      <div id="display"></div>
+      <div class="content">
+          <button id="clear" class="buttondis">c</button>
+          <button class="buttondis">/</button>
+          <button class="buttondis">*</button>
+          <button class="buttondis">&larr;</button>
+          <button class="buttondis">7</button>
+          <button class="buttondis">8</button>
+          <button class="buttondis">9</button>
+          <button class="buttondis">-</button>
+          <button class="buttondis">4</button>
+          <button class="buttondis">5</button>
+          <button class="buttondis">6</button>
+          <button class="buttondis">+</button>
+          <button class="buttondis">1</button>
+          <button class="buttondis">2</button>
+          <button class="buttondis">3</button>
+          <button class="buttondis">.</button>
+          <button class="buttondis">(</button>
+          <button class="buttondis">0</button>
+          <button class="buttondis">)</button>
+          <button id="mosavy" class="buttondis">=</button>
+      </div>
+    </div>
+</section>
+<script src="javascript-calculator.js"></script>
+<script>
+  let display = document.getElementById("display");
+  let buttons = Array.from(document.getElementsByClassName("buttondis"));
+
+  buttons.map( buttons => {
+
+    buttons.addEventListener('click', (e) => {
+      switch (e.target.innerText){
+        case 'c':
+          display.innerText = "";
+        case '←':
+          if (display.innerText){
+            display.innerText = display.innerText.slice(0, -1)
+          }
+          break;
+        case '=':
+          try {
+            display.innerText = eval(display.innerText);
+          } catch {
+            display.innerText = 'Error!';
+          }
+          break;
+        default:
+          display.innerText += e.target.innerText;
+      }
+    })
+
+  });
+  console.log(display,buttons);
+</script>
+</body>
+</html>
